@@ -1,0 +1,14 @@
+{
+  "name": "blogspace-root",
+  "version": "1.0.0",
+  "description": "BLOGSPACE — Full-Stack MERN Editorial Blogging Platform",
+  "scripts": {
+    "install:all": "npm --prefix backend install && npm --prefix frontend install",
+    "seed": "npm --prefix backend run seed",
+    "test:e2e": "node test-e2e-journey.js"
+  },
+  "keywords": ["mern", "blog", "react", "nodejs", "express", "mongodb"],
+  "author": "Blogspace Team",
+  "license": "MIT"
+}
+
