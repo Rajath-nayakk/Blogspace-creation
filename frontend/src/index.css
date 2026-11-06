@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#FBFBFB] text-[#111827] font-sans antialiased selection:bg-blue-100 selection:text-blue-900;
+  }
+}
+
+/* Custom editorial prose styles for React Markdown */
+.prose-editorial {
+  color: #1f2937;
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.1875rem;
+  line-height: 1.85;
+}
+
+.prose-editorial h1,
+.prose-editorial h2,
+.prose-editorial h3,
+.prose-editorial h4 {
+  font-family: 'Inter', sans-serif;
+  color: #111827;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose-editorial h1 { font-size: 2rem; line-height: 1.25; }
+.prose-editorial h2 { font-size: 1.5rem; line-height: 1.35; }
+.prose-editorial h3 { font-size: 1.25rem; line-height: 1.4; }
+
+.prose-editorial p {
+  margin-bottom: 1.5rem;
+}
+
+.prose-editorial a {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-editorial a:hover {
+  color: #1d4ed8;
+}
+
+.prose-editorial blockquote {
+  border-left: 4px solid #2563eb;
+  padding-left: 1.25rem;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  color: #4b5563;
+}
+
+.prose-editorial ul,
+.prose-editorial ol {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.prose-editorial ul {
+  list-style-type: disc;
+}
+
+.prose-editorial ol {
+  list-style-type: decimal;
+}
+
+.prose-editorial li {
+  margin-bottom: 0.5rem;
+}
+
+.prose-editorial code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+  background-color: #f3f4f6;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  color: #0f172a;
+}
+
+.prose-editorial pre {
+  background-color: #0f172a;
+  color: #f8fafc;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.prose-editorial pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font-size: 0.9em;
+}
+
+.prose-editorial img {
+  border-radius: 0.75rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Glass & Card effects */
+.editorial-card {
+  background: #ffffff;
+  border: 1px solid #f0f0f2;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorial-card:hover {
+  border-color: #e2e4e9;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+  transform: translateY(-2px);
+}
