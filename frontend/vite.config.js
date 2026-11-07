@@ -17,4 +17,34 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (
+              id.includes('react-markdown') ||
+              id.includes('remark-gfm') ||
+              id.includes('micromark') ||
+              id.includes('mdast') ||
+              id.includes('unist')
+            ) {
+              return 'markdown-bundle';
+            }
+            if (id.includes('lucide-react')) {
+              return 'icons-bundle';
+            }
+            if (
+              id.includes('react') ||
+              id.includes('react-dom') ||
+              id.includes('react-router')
+            ) {
+              return 'react-vendor';
+            }
+            return 'vendor';
+          }
+        },
+      },
+    },
+  },
 });

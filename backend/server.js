@@ -18,6 +18,9 @@ connectDB();
 
 const app = express();
 
+// Trust reverse proxy (Render, Vercel, Heroku)
+app.set('trust proxy', 1);
+
 // Security Headers
 app.use(
   helmet({
@@ -36,11 +39,24 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
-        callback(null, true);
-      } else {
-        callback(new Error('Blocked by CORS'));
+      if (!origin) return callback(null, true);
+
+      // Check explicit allowed origins
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
       }
+
+      // Allow Vercel deployments and preview URLs (*.vercel.app)
+      if (/\.vercel\.app$/.test(origin)) {
+        return callback(null, true);
+      }
+
+      // Allow in non-production
+      if (process.env.NODE_ENV !== 'production') {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`Blocked by CORS: ${origin}`));
     },
     credentials: true,
   })
@@ -78,7 +94,15 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Static folder for uploaded files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Health check endpoint
+// Root & Health check endpoints
+app.get('/', (req, res) => {
+  res.json({
+    status: 'ok',
+    message: 'BLOGSPACE API Server is running',
+    docs: '/api/blogs',
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
@@ -107,8 +131,6 @@ const server = app.listen(PORT, () => {
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err) => {
   console.error(`Unhandled Rejection Error: ${err.message}`);
-  // Keep server alive or log cleanly
 });
 
 module.exports = app;
-

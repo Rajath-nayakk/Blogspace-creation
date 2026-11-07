@@ -7,7 +7,7 @@ const { users, blogs, sampleComments } = require('./seedData');
 
 const importData = async () => {
   try {
-    const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/blogspace';
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/blogspace';
     console.log(`Connecting to MongoDB at: ${mongoUri}`);
     await mongoose.connect(mongoUri);
 
@@ -81,7 +81,7 @@ const importData = async () => {
 
 const destroyData = async () => {
   try {
-    const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/blogspace';
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/blogspace';
     await mongoose.connect(mongoUri);
 
     await Comment.deleteMany();
